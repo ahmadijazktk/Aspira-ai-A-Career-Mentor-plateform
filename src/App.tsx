@@ -9,6 +9,10 @@ import { Dashboard } from "./pages/Dashboard";
 import { AIChatPage } from "./pages/AIChatPage";
 import { TasksPage } from "./pages/TasksPage";
 import { CoursesPage } from "./pages/CoursesPage";
+import { SuccessStoriesPage } from "./pages/SuccessStoriesPage";
+import { CommunityPage } from "./pages/CommunityPage";
+import { GoalsPage } from "./pages/GoalsPage";
+import { AnalyticsPage } from "./pages/AnalyticsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,10 +30,10 @@ const App = () => (
             <Route path="/chat" element={<AIChatPage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/courses" element={<CoursesPage />} />
-            <Route path="/success-stories" element={<div className="p-6"><h1 className="text-2xl font-bold">Success Stories - Coming Soon</h1></div>} />
-            <Route path="/community" element={<div className="p-6"><h1 className="text-2xl font-bold">Community - Coming Soon</h1></div>} />
-            <Route path="/goals" element={<div className="p-6"><h1 className="text-2xl font-bold">Goals - Coming Soon</h1></div>} />
-            <Route path="/analytics" element={<div className="p-6"><h1 className="text-2xl font-bold">Analytics - Coming Soon</h1></div>} />
+            <Route path="/success-stories" element={<SuccessStoriesPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/goals" element={<GoalsPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
