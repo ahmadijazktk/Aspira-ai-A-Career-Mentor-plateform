@@ -9,7 +9,7 @@ const ResizablePanelGroup = ({ className, ...props }: React.ComponentProps<typeo
     {...props}
   />
 );
-
+//changes had been made
 const ResizablePanel = ResizablePrimitive.Panel;
 
 const ResizableHandle = ({

@@ -16,5 +16,11 @@
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
-  }
+  },
+  "_comment": {
+
+  "_comments":"@/This is just a note, will be ignored by the program"
+} 
 }
+
+

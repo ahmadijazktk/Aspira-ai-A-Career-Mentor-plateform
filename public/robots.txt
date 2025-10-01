@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Changes had been made here as well
