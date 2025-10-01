@@ -65,18 +65,17 @@ export function LandingPage() {
         <div className="relative max-w-6xl mx-auto text-center">
           <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/30">
             <Sparkles className="w-4 h-4 mr-2" />
-            AI-Powered Career Development
+            Your AI Career Mentor
           </Badge>
           
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Aspira.ai Career Mentor
+            Aspira.ai — Your Career Mentor
             <br />
-            <span className="text-white/90">Unlock Your Full Potential</span>
+            <span className="text-white/90">Smarter Career Growth with AI</span>
           </h1>
           
           <p className="text-xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Get personalized career guidance, track your progress, and achieve your professional goals 
-            with our AI-powered mentor that understands your unique journey.
+           Your AI-powered mentor to help you discover career paths, build skills, and stay motivated. Aspira.ai creates personalized plans, recommends the right courses, and keeps you on track
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -86,7 +85,7 @@ export function LandingPage() {
               onClick={() => navigate("/chat")}
             >
               <MessageSquare className="w-5 h-5 mr-2" />
-              Try AI Mentor Now
+              Try Aspira.ai Free
             </Button>
             <Button
               size="lg"
@@ -122,8 +121,7 @@ export function LandingPage() {
               <span className="gradient-text"> Career Success</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our AI-powered platform provides comprehensive tools to guide your career journey
-              from skill assessment to goal achievement.
+              Aspira.ai combines AI-driven insights with practical tools to help you plan, learn, and succeed in your professional journey.
             </p>
           </div>
           
@@ -165,7 +163,7 @@ export function LandingPage() {
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Why Choose Our
-                <span className="gradient-text"> AI Career Mentor?</span>
+                <span className="gradient-text"> Aspira.ai - Your AI Career Mentor?</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Join thousands of professionals who have transformed their careers 
@@ -210,7 +208,7 @@ export function LandingPage() {
                     ))}
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    "This platform completely transformed my career path!" - Sarah K.
+                    "This platform completely transformed my career path!" - Roman Khan.
                   </p>
                 </div>
               </Card>
