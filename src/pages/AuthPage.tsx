@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bot, Mail, Lock, User } from "lucide-react";
+import { Bot, Mail, Lock, User, UserCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export function AuthPage() {
@@ -16,6 +16,7 @@ export function AuthPage() {
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
+  const [gender, setGender] = useState<"male" | "female">("male");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +45,10 @@ export function AuthPage() {
       });
       return;
     }
-    signup(signupName, signupEmail, signupPassword);
+    signup(signupName, signupEmail, signupPassword, gender);
     toast({
       title: "Account created!",
-      description: "Welcome to AI Career Mentor",
+      description: "Welcome to Aspira.ai",
     });
   };
 
@@ -58,7 +59,7 @@ export function AuthPage() {
           <div className="w-16 h-16 bg-gradient-primary rounded-xl mx-auto mb-4 flex items-center justify-center">
             <Bot className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl">AI Career Mentor</CardTitle>
+          <CardTitle className="text-2xl">Aspira.ai</CardTitle>
           <CardDescription>Start your journey to career success</CardDescription>
         </CardHeader>
         <CardContent>
@@ -146,6 +147,33 @@ export function AuthPage() {
                       value={signupPassword}
                       onChange={(e) => setSignupPassword(e.target.value)}
                     />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label>Gender</Label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        checked={gender === "male"}
+                        onChange={(e) => setGender(e.target.value as "male")}
+                        className="w-4 h-4"
+                      />
+                      <span className="text-sm">Male</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        checked={gender === "female"}
+                        onChange={(e) => setGender(e.target.value as "female")}
+                        className="w-4 h-4"
+                      />
+                      <span className="text-sm">Female</span>
+                    </label>
                   </div>
                 </div>
                 <Button type="submit" className="w-full btn-primary">

@@ -6,13 +6,14 @@ interface User {
   name: string;
   email: string;
   avatar: string;
+  gender?: "male" | "female";
 }
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   login: (email: string, password: string) => void;
-  signup: (name: string, email: string, password: string) => void;
+  signup: (name: string, email: string, password: string, gender?: "male" | "female") => void;
   logout: () => void;
 }
 
@@ -31,25 +32,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = (email: string, password: string) => {
-    // Simulate login
-    const newUser: User = {
-      id: "1",
-      name: email.split("@")[0],
-      email,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-    };
-    setUser(newUser);
-    localStorage.setItem("user", JSON.stringify(newUser));
-    navigate("/dashboard");
+    // Simulate login - check if user exists in storage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setUser(userData);
+      navigate("/dashboard");
+    } else {
+      const newUser: User = {
+        id: "1",
+        name: email.split("@")[0],
+        email,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+        gender: "male"
+      };
+      setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
+      navigate("/dashboard");
+    }
   };
 
-  const signup = (name: string, email: string, password: string) => {
-    // Simulate signup
+  const signup = (name: string, email: string, password: string, gender: "male" | "female" = "male") => {
+    // Simulate signup with gender-specific avatars
+    const avatarStyle = gender === "female" ? "avataaars-neutral" : "avataaars";
     const newUser: User = {
       id: "1",
       name,
       email,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+      avatar: `https://api.dicebear.com/7.x/${avatarStyle}/svg?seed=${email}`,
+      gender,
     };
     setUser(newUser);
     localStorage.setItem("user", JSON.stringify(newUser));

@@ -11,15 +11,16 @@ import {
 } from "@/components/ui/sidebar";
 import {
   LayoutDashboard,
-  MessageSquare,
+  Bot,
   CheckSquare,
   BookOpen,
+  FileText,
   Trophy,
   Users,
   Target,
-  TrendingUp,
+  BarChart3,
+  Sparkles,
   LogOut,
-  Bot,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -35,7 +36,7 @@ const menuItems = [
   {
     title: "AI Mentor Chat",
     url: "/chat",
-    icon: MessageSquare,
+    icon: Bot,
     description: "Get personalized guidance",
   },
   {
@@ -49,6 +50,12 @@ const menuItems = [
     url: "/courses",
     icon: BookOpen,
     description: "Learn new skills",
+  },
+  {
+    title: "Resume Builder",
+    url: "/resume",
+    icon: FileText,
+    description: "Build your CV",
   },
   {
     title: "Success Stories",
@@ -74,7 +81,7 @@ const additionalItems = [
   {
     title: "Analytics",
     url: "/analytics",
-    icon: TrendingUp,
+    icon: BarChart3,
     description: "View your progress",
   },
 ];
@@ -94,9 +101,9 @@ export function AppSidebar() {
         {/* Logo Section */}
         <div className="p-4 flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-            <Bot className="w-5 h-5 text-white" />
+            <Sparkles className="w-5 h-5 text-white" />
           </div>
-          {!collapsed && <span className="font-semibold text-lg">AI Mentor</span>}
+          {!collapsed && <span className="font-semibold text-lg">Aspira.ai</span>}
         </div>
 
         <Separator />

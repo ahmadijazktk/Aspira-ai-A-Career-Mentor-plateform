@@ -69,7 +69,7 @@ export function LandingPage() {
           </Badge>
           
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Your AI Career Mentor
+            Aspira.ai Career Mentor
             <br />
             <span className="text-white/90">Unlock Your Full Potential</span>
           </h1>

@@ -1,68 +1,117 @@
-# AI Career Mentor Platform - Tech Stack & Skills Used
+# Aspira.ai - AI Career Mentor Platform
 
-Just completed building an **AI Career Mentor Platform** - a comprehensive career guidance application that helps users navigate their professional journey with AI-powered recommendations! 🚀
+## Tech Stack & Skills Used 🚀
 
-## 🛠️ **Frontend Technologies:**
-- **React 18** - Core framework with hooks and functional components
-- **TypeScript** - Type safety and better developer experience
+### Frontend Development
+- **React 18** - Modern UI library with hooks and functional components
+- **TypeScript** - Type-safe JavaScript for better code quality
+- **Vite** - Lightning-fast build tool and dev server
 - **React Router v6** - Client-side routing and navigation
-- **Tailwind CSS** - Utility-first styling with custom design system
-- **Vite** - Fast build tool and dev server
 
-## 🎨 **UI/UX Libraries:**
-- **Radix UI** - Headless accessible components
-- **Shadcn/ui** - Beautiful component library
-- **Lucide React** - Modern icon library
-- **Recharts** - Data visualization and charts
-- **Framer Motion** (planned) - Smooth animations
+### UI/UX Design
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful, accessible component library
+- **Radix UI** - Unstyled, accessible component primitives
+- **Lucide React** - Comprehensive icon library
+- **next-themes** - Dark/Light mode theming
+- **Framer Motion** - Smooth animations (via Tailwind)
 
-## 📊 **Data & State Management:**
-- **TanStack React Query** - Server state management
-- **React Context** - Global state management
-- **Local Storage** - Client-side data persistence
+### State Management & Data
+- **React Context API** - Authentication and global state
+- **TanStack Query (React Query)** - Server state management
+- **LocalStorage** - Client-side data persistence
 
-## 🔧 **Development Tools:**
-- **ESLint** - Code linting and quality
-- **Class Variance Authority** - Component variant management
-- **clsx** - Conditional className utility
-- **Tailwind Merge** - CSS class optimization
+### Charts & Visualization
+- **Recharts** - Composable charting library for analytics and data visualization
 
-## 🌍 **Internationalization:**
-- **React i18next** (planned) - Multi-language support (English, Urdu, Arabic, Chinese)
+### Form Handling & Validation
+- **React Hook Form** - Performant form management
+- **Zod** - TypeScript-first schema validation
 
-## 🏗️ **Architecture Features:**
-- **Component-based Architecture** - Reusable and modular components
-- **Custom Design System** - Consistent theming with CSS variables
-- **Responsive Design** - Mobile-first approach
-- **Accessibility First** - WCAG compliant components
-- **SEO Optimized** - Semantic HTML and meta tags
+### PDF Generation
+- **jsPDF** - Client-side PDF generation
+- **html2canvas** - HTML to canvas rendering for resume export
 
-## 📱 **Key Features Implemented:**
-- 🎯 Interactive AI Chat Interface
-- 📊 Comprehensive Analytics Dashboard
-- 🎯 Goal Setting & Progress Tracking
-- 📚 Course Recommendations
-- 🏆 Success Stories Showcase
-- 👥 Community Discussion Forums
-- 🔔 Smart Notifications System
-- 🌐 Multi-language Support Ready
+### Component Architecture
+- **Compound Components** - Flexible, composable UI patterns
+- **Custom Hooks** - Reusable logic (useAuth, useToast, useMobile)
+- **Protected Routes** - Authentication-based routing
 
-## 💡 **Skills Demonstrated:**
-- Modern React Development
-- TypeScript Implementation
-- UI/UX Design Principles
-- Responsive Web Design
-- Component Library Creation
-- State Management Patterns
-- Performance Optimization
-- Accessibility Standards
+### Key Features Implemented
+✅ AI-powered chat mentor with question limits
+✅ Complete authentication flow (sign in/up with gender-specific avatars)
+✅ Protected routes and authorization
+✅ Interactive dashboard with progress tracking
+✅ Task management with milestones
+✅ Course recommendations system
+✅ Resume builder with PDF export
+✅ Success stories showcase with real profile images
+✅ Community discussions
+✅ Goal tracking with progress visualization
+✅ Analytics dashboard with multiple chart types
+✅ Dark/Light theme toggle
+✅ Responsive design (mobile-first)
+✅ Toast notifications
+✅ Avatar system with gender customization
 
-The platform features a beautiful gradient design system, smooth animations, and an intuitive user experience that guides users through their career development journey.
+### Development Best Practices
+- Component-based architecture
+- TypeScript for type safety
+- Responsive design patterns
+- Accessible UI components
+- Clean code principles
+- Reusable utility functions
+- Semantic HTML structure
+- SEO optimization ready
 
-Perfect example of how modern web technologies can create engaging, accessible, and performant applications! 
-
-#ReactJS #TypeScript #TailwindCSS #WebDevelopment #Frontend #CareerTech #AI #UXDesign #OpenToWork #TechStack
+### Design Patterns
+- Provider pattern (Context API)
+- Compound component pattern
+- Custom hooks pattern
+- Higher-order components (Protected Routes)
+- Composition over inheritance
 
 ---
 
-*What's your favorite tech stack for building modern web applications? Let me know in the comments!* 👇
+## LinkedIn Post Template
+
+🎉 Excited to share my latest project: **Aspira.ai** - An AI-powered career development platform! 🚀
+
+Built with modern web technologies:
+🔹 React & TypeScript for robust, type-safe development
+🔹 Tailwind CSS & shadcn/ui for beautiful, accessible UI
+🔹 Recharts for data visualization & analytics
+🔹 jsPDF & html2canvas for resume PDF export
+🔹 React Router for seamless navigation
+🔹 Gender-specific avatars with DiceBear API
+
+Key Features:
+✨ AI mentor chat with smart question limits (3 free, unlimited for members)
+✨ Complete authentication system with protected routes
+✨ Interactive resume builder with PDF export functionality
+✨ Progress tracking & analytics with beautiful charts
+✨ Goal setting & milestone tracking
+✨ Community & success stories showcase
+✨ Dark/Light theme support
+✨ Fully responsive design
+
+Technical Highlights:
+💻 15+ modern web technologies integrated
+💻 Custom hooks for reusable logic
+💻 Context API for state management
+💻 PDF generation from HTML/Canvas
+💻 Protected routing with authentication
+💻 Real-time form validation with Zod
+💻 Beautiful UI with 50+ Radix UI components
+
+This project demonstrates full-stack frontend development skills including state management, data visualization, PDF generation, authentication flows, and responsive design.
+
+#React #TypeScript #WebDevelopment #Frontend #TailwindCSS #UIUXDesign #CareerDevelopment #AI #OpenToWork #JavaScript #PDFGeneration
+
+---
+
+**Project:** Aspira.ai
+**Type:** Career Development Platform
+**Status:** Live & Functional
+**Technologies:** 15+ modern web technologies integrated
+**Features:** 10+ major features including AI chat, resume builder, analytics, and more

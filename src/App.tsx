@@ -13,6 +13,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { AIChatPage } from "./pages/AIChatPage";
 import { TasksPage } from "./pages/TasksPage";
 import { CoursesPage } from "./pages/CoursesPage";
+import { ResumePage } from "./pages/ResumePage";
 import { SuccessStoriesPage } from "./pages/SuccessStoriesPage";
 import { CommunityPage } from "./pages/CommunityPage";
 import { GoalsPage } from "./pages/GoalsPage";
@@ -55,6 +56,14 @@ const App = () => (
                   element={
                     <ProtectedRoute>
                       <CoursesPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/resume"
+                  element={
+                    <ProtectedRoute>
+                      <ResumePage />
                     </ProtectedRoute>
                   }
                 />
