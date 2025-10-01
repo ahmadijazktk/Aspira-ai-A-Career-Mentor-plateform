@@ -96,3 +96,4 @@ export function useAuth() {
   }
   return context;
 }
+//changes had been made
