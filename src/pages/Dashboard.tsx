@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const [userName] = useState("Ahmad"); // This would come from user context
+  const [userName] = useState(""); // This would come from user context
 
   const stats = [
     {
