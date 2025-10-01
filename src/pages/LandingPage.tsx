@@ -92,7 +92,7 @@ export function LandingPage() {
               size="lg"
               variant="outline"
               className="bg-transparent border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/auth")}
             >
               <Target className="w-5 h-5 mr-2" />
               View Dashboard
@@ -186,7 +186,7 @@ export function LandingPage() {
               <Button
                 size="lg"
                 className="btn-primary mt-8 px-8 py-6 text-lg"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/auth")}
               >
                 Start Your Journey
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -237,13 +237,13 @@ export function LandingPage() {
               onClick={() => navigate("/chat")}
             >
               <Bot className="w-5 h-5 mr-2" />
-              Start Free Trial
+              Try AI Mentor
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="bg-transparent border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/auth")}
             >
               Learn More
             </Button>

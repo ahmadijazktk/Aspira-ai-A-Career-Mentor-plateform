@@ -9,15 +9,19 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Globe, Bell, User, Settings, X } from "lucide-react";
+import { Globe, Bell, User, Settings, X, Moon, Sun } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTheme } from "next-themes";
 
 export function Header() {
   const [language, setLanguage] = useState("English");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   const languages = [
     { code: "en", name: "English" },
@@ -50,33 +54,8 @@ export function Header() {
     }
   ];
 
-  const handleSignIn = () => {
-    if (!isLoggedIn) {
-      navigate("/");
-      toast({
-        title: "Please sign up or sign in",
-        description: "Create an account to access all features",
-      });
-    }
-  };
-
-  const handleSignUp = () => {
-    if (!isLoggedIn) {
-      navigate("/");
-      toast({
-        title: "Welcome!",
-        description: "Sign up to start your AI career mentoring journey",
-      });
-    }
-  };
-
-  const handleSignOut = () => {
-    setIsLoggedIn(false);
-    navigate("/");
-    toast({
-      title: "Signed out successfully",
-      description: "Come back soon to continue your learning journey!",
-    });
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -91,16 +70,16 @@ export function Header() {
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         {/* Language Switcher */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="ghost" size="sm" className="gap-2">
               <Globe className="w-4 h-4" />
               <span className="hidden sm:inline">{language}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-card">
             {languages.map((lang) => (
               <DropdownMenuItem
                 key={lang.code}
@@ -111,6 +90,20 @@ export function Header() {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        {/* Dark/Light Mode Toggle */}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleTheme}
+          className="w-9 px-0"
+        >
+          {theme === "dark" ? (
+            <Sun className="h-4 w-4" />
+          ) : (
+            <Moon className="h-4 w-4" />
+          )}
+        </Button>
 
         {/* Notifications */}
         <DropdownMenu open={showNotifications} onOpenChange={setShowNotifications}>
@@ -165,15 +158,18 @@ export function Header() {
         </DropdownMenu>
 
         {/* User Menu */}
-        {isLoggedIn ? (
+        {isAuthenticated && user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-2">
-                <User className="w-4 h-4" />
-                <span className="hidden sm:inline">Profile</span>
+              <Button variant="ghost" size="sm" className="gap-2">
+                <Avatar className="h-6 w-6">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
+                </Avatar>
+                <span className="hidden sm:inline">{user.name}</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="bg-card">
               <DropdownMenuItem>
                 <User className="w-4 h-4 mr-2" />
                 Profile
@@ -182,17 +178,14 @@ export function Header() {
                 <Settings className="w-4 h-4 mr-2" />
                 Settings
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleSignOut}>
-                Sign Out
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={handleSignIn}>
+            <Button variant="outline" size="sm" onClick={() => navigate("/auth")}>
               Sign In
             </Button>
-            <Button className="btn-primary" size="sm" onClick={handleSignUp}>
+            <Button className="btn-primary" size="sm" onClick={() => navigate("/auth")}>
               Sign Up
             </Button>
           </div>

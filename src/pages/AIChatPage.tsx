@@ -1,9 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import {
   Bot,
   User,
@@ -14,9 +25,10 @@ import {
   BookOpen,
   Target,
   TrendingUp,
-  MessageSquare,
   Sparkles,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 interface Message {
   id: string;
@@ -27,6 +39,9 @@ interface Message {
 }
 
 export function AIChatPage() {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -45,6 +60,11 @@ export function AIChatPage() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [questionCount, setQuestionCount] = useState(() => {
+    const stored = localStorage.getItem("aiChatQuestions");
+    return stored ? parseInt(stored) : 0;
+  });
+  const [showLimitDialog, setShowLimitDialog] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -117,7 +137,13 @@ export function AIChatPage() {
 
   const handleSendMessage = (messageContent?: string) => {
     const content = messageContent || inputValue.trim();
-    if (!content) return;
+    if (!content || isTyping) return;
+
+    // Check question limit for non-authenticated users
+    if (!isAuthenticated && questionCount >= 3) {
+      setShowLimitDialog(true);
+      return;
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -128,6 +154,13 @@ export function AIChatPage() {
 
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
+    
+    // Increment question count for non-authenticated users
+    if (!isAuthenticated) {
+      const newCount = questionCount + 1;
+      setQuestionCount(newCount);
+      localStorage.setItem("aiChatQuestions", newCount.toString());
+    }
     
     simulateAIResponse(content);
   };
@@ -163,20 +196,27 @@ export function AIChatPage() {
     <div className="h-full flex flex-col bg-background">
       {/* Header */}
       <div className="border-b border-border bg-card px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
-            <Bot className="w-6 h-6 text-white" />
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+              <Bot className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-semibold">AI Career Mentor</h1>
+              <p className="text-sm text-muted-foreground">
+                Your personal guide to career success
+              </p>
+            </div>
+            <Badge className="ml-4 bg-success/10 text-success border-success/20">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Online
+            </Badge>
           </div>
-          <div>
-            <h1 className="text-xl font-semibold">AI Career Mentor</h1>
-            <p className="text-sm text-muted-foreground">
-              Your personal guide to career success
-            </p>
-          </div>
-          <Badge className="ml-auto bg-success/10 text-success border-success/20">
-            <Sparkles className="w-3 h-3 mr-1" />
-            Online
-          </Badge>
+          {!isAuthenticated && (
+            <Badge variant="outline" className="text-xs">
+              {3 - questionCount} free questions remaining
+            </Badge>
+          )}
         </div>
       </div>
 
@@ -325,6 +365,24 @@ export function AIChatPage() {
           </div>
         </div>
       </div>
+
+      {/* Question Limit Dialog */}
+      <AlertDialog open={showLimitDialog} onOpenChange={setShowLimitDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Free Questions Limit Reached</AlertDialogTitle>
+            <AlertDialogDescription>
+              You've used all 3 free questions. Create an account to continue chatting with your AI Career Mentor and unlock unlimited questions, progress tracking, and more features!
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => navigate("/auth")} className="btn-primary">
+              Sign Up / Sign In
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

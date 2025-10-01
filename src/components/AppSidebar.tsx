@@ -4,7 +4,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -17,10 +16,14 @@ import {
   BookOpen,
   Trophy,
   Users,
-  Bell,
   Target,
   TrendingUp,
+  LogOut,
+  Bot,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 const menuItems = [
   {
@@ -81,37 +84,60 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const location = useLocation();
   const currentPath = location.pathname;
+  const { user, logout } = useAuth();
 
   const isActive = (path: string) => currentPath === path;
-  const getNavClasses = (isActiveRoute: boolean) =>
-    `sidebar-item ${isActiveRoute ? "bg-primary text-primary-foreground shadow-primary" : ""}`;
 
   return (
-    <Sidebar className={collapsed ? "w-14" : "w-64"}>
-      <SidebarContent className="bg-sidebar">
+    <Sidebar className={collapsed ? "w-16" : "w-64"}>
+      <SidebarContent className="bg-card border-r">
+        {/* Logo Section */}
+        <div className="p-4 flex items-center gap-2">
+          <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
+            <Bot className="w-5 h-5 text-white" />
+          </div>
+          {!collapsed && <span className="font-semibold text-lg">AI Mentor</span>}
+        </div>
+
+        <Separator />
+
+        {/* User Profile */}
+        {user && !collapsed && (
+          <div className="p-4">
+            <div className="flex items-center gap-3">
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">{user.name}</p>
+                <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {user && !collapsed && <Separator />}
+
         {/* Main Navigation */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            Main Menu
-          </SidebarGroupLabel>
+        <SidebarGroup className="flex-1">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1 p-2">
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
-                      className={getNavClasses(isActive(item.url))}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground hover:bg-accent"
+                        }`
+                      }
                     >
                       <item.icon className="w-5 h-5 flex-shrink-0" />
-                      {!collapsed && (
-                        <div className="flex flex-col">
-                          <span className="font-medium">{item.title}</span>
-                          <span className="text-xs text-muted-foreground">
-                            {item.description}
-                          </span>
-                        </div>
-                      )}
+                      {!collapsed && <span className="text-sm">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -120,29 +146,27 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        <Separator />
+
         {/* Additional Tools */}
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            Tools
-          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1 p-2">
               {additionalItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
-                      className={getNavClasses(isActive(item.url))}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground hover:bg-accent"
+                        }`
+                      }
                     >
                       <item.icon className="w-5 h-5 flex-shrink-0" />
-                      {!collapsed && (
-                        <div className="flex flex-col">
-                          <span className="font-medium">{item.title}</span>
-                          <span className="text-xs text-muted-foreground">
-                            {item.description}
-                          </span>
-                        </div>
-                      )}
+                      {!collapsed && <span className="text-sm">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -150,6 +174,24 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Logout Button */}
+        {user && (
+          <>
+            <Separator />
+            <div className="p-2">
+              <SidebarMenuButton asChild>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-foreground hover:bg-accent transition-colors"
+                >
+                  <LogOut className="w-5 h-5 flex-shrink-0" />
+                  {!collapsed && <span className="text-sm">Logout</span>}
+                </button>
+              </SidebarMenuButton>
+            </div>
+          </>
+        )}
       </SidebarContent>
     </Sidebar>
   );
